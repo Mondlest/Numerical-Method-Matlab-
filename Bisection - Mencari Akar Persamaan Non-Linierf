@@ -1,0 +1,47 @@
+clc
+clear
+% Persamaan y=x^3 - 8
+xa = input('Batas atas interval =');
+xb = input('Batas bawah interval=');
+toleransi = input('Toleransi=');
+fx = @(x) x^3 - 8;
+fxa = fx(xa);
+fxb = fx(xb);
+disp('Hasil Perhitungan');
+disp('---------------------------');
+disp(' xa    xb      fxa    fxb')
+disp('---------------------------');
+if (fxa*fxb)>0 %seharusnya fxa*fxb itu negatif
+    disp('Batas Interval Tidak Cocok, Silakan Coba Lagi!');
+else 
+    if fxa==0
+        disp('------------');
+        fprintf('Akar persamaannya adalah=%2.3f\n', xa);
+        fprintf('Nilai fungsi F(x) adalah = %2.3f\n', fxa);
+    elseif fxb==0
+        disp('-----------');
+        fprintf('Akar persamaannya adalah=%2.3f\n', xb);
+        fprintf('Nilai fungsi F(x) adalah = %2.3f\n', fxb);
+else 
+    ulang =1;
+    while ulang ==1
+        xm = (xa+xb)/2;
+        fxm = fx(xm);
+        if abs(xa-xb)<= toleransi
+            break;
+        elseif (fxm*fxa)<0
+            xb = xm;
+            fxb = fxm;
+            fprintf('%2.3f %2.3f %2.3f %2.3f \n', xa, xb, fxa, fxb);
+        else 
+            xa = xm;
+            fxa = fxm;
+            fprintf('%2.3f %2.3f %2.3f %2.3f \n', xa, xb, fxa, fxb);
+        end
+    end
+    disp('---------------------------');
+    fprintf('Akar persamaan = %2.3f\n', xm);
+    fprintf('Nilai F(x) adalah %2.3f\n', fxm);
+    end
+    disp('---------------------------');
+end
